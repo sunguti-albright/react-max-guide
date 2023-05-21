@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-function ExpenseItem() {
-  return (
-    <div>ExpenseItem</div>
-  )
+function ExpenseItem(props) {
+  return <div>
+   <p>Title : {props.title}</p> <p>Date : {props.date}</p> <p>Amount: {props.amount}</p>
+  </div>;
 }
 
-export default ExpenseItem
+export default ExpenseItem;
