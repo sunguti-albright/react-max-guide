@@ -10,11 +10,43 @@ function ExpenseForm() {
     setTitle(event.target.value);
   };
   const amountChangeHandler = (event) => {
-   setAmount(event.target.value);
+    setAmount(event.target.value);
   };
   const dateChangeHandler = (event) => {
     setDate(event.target.value);
   };
+
+  //   alternative method:
+  // const [userInput, setUserInput] = useState({
+  //   enteredTitle: '',
+  //   enteredAmount: '',
+  //   enteredDate: '',
+  // });
+
+  // const userTitleChangeHandler = (event) => {
+  //   setUserInput({
+  //     ...userInput,
+  //     enteredTitle: event.target.value,
+  //   });
+  // };
+
+  // const userAmountChangeHandler = (event) => {
+  //   setUserInput({
+  //     ...userInput,
+  //     enteredAmount: event.target.value,
+  //   });
+
+    //UPDATING STATE THAT DEPENDS ON THE PREVIOUS STATE
+    //     setUserInput((prevState)=>{
+    // return { ...prevState, enteredAmount: event.target.value}
+    //   })
+  // };
+  // const userDateChangeHandler = (event) => {
+  //   setUserInput({
+  //     ...userInput,
+  //     enteredDate: event.target.value,
+  //   });
+  // };
 
 const submitHandler = (event) => {
   event.preventDefault();
@@ -27,18 +59,20 @@ const submitHandler = (event) => {
   setTitle("");
   setAmount("");
   setDate("");
+};
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          onChange={titleChangeHandler}
           <label>Title</label>
-          <input type="text" />
+          <input type="text" value={enteredTitle} onChange={titleChangeHandler} />
+          {/* <input type="text"  onChange={userTitleChangeHandler}/> this works too */}
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
           <input
             type="number"
+            value={enteredAmount}
             min="0.01"
             step="0.01"
             onChange={amountChangeHandler}
@@ -48,6 +82,7 @@ const submitHandler = (event) => {
           <label>Date</label>
           <input
             type="date"
+            value={enteredDate}
             min="2020-01-01"
             max="2023-12-12"
             onChange={dateChangeHandler}
