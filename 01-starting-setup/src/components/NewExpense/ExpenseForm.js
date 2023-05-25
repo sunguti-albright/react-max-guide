@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   const [enteredTitle, setTitle] = useState("");
   const [enteredAmount, setAmount] = useState("");
   const [enteredDate, setDate] = useState("");
@@ -36,10 +36,10 @@ function ExpenseForm() {
   //     enteredAmount: event.target.value,
   //   });
 
-    //UPDATING STATE THAT DEPENDS ON THE PREVIOUS STATE
-    //     setUserInput((prevState)=>{
-    // return { ...prevState, enteredAmount: event.target.value}
-    //   })
+  //UPDATING STATE THAT DEPENDS ON THE PREVIOUS STATE
+  //     setUserInput((prevState)=>{
+  // return { ...prevState, enteredAmount: event.target.value}
+  //   })
   // };
   // const userDateChangeHandler = (event) => {
   //   setUserInput({
@@ -48,24 +48,31 @@ function ExpenseForm() {
   //   });
   // };
 
-const submitHandler = (event) => {
-  event.preventDefault();
-  const expenseData = {
-    title: enteredTitle,
-    amount : enteredAmount,
-    date : new Date(enteredDate)
-  }
-  console.log(expenseData);
-  setTitle("");
-  setAmount("");
-  setDate("");
-};
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+    // console.log(expenseData);
+    //accessing data from child to parent component. This function is passed to child from parent
+    //passes expenseData from child to parent using props. function name is similar to parent function name
+    props.onSaveExpenseData(expenseData);
+    setTitle("");
+    setAmount("");
+    setDate("");
+  };
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" value={enteredTitle} onChange={titleChangeHandler} />
+          <input
+            type="text"
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+          />
           {/* <input type="text"  onChange={userTitleChangeHandler}/> this works too */}
         </div>
         <div className="new-expense__control">
