@@ -24,6 +24,14 @@ function App() {
     },
   ];
 
+  //destructuring DUMMY EXPENSES to 'expenses'
+const [expenses, setExpenses] = useState(DUMMY_EXPENSES)
+//updating expenses based on previous expense snapshot...instead of initial expense state
+  const addExpenseHandler = expenseInfo=>{
+    setExpenses((prevExpenses)=>{
+      return [expenseInfo, ...prevExpenses]
+    })
+  }
   // return (
   //   <div>
   //     <h2>Let's get started!</h2>
