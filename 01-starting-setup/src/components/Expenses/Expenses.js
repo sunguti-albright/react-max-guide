@@ -3,6 +3,12 @@ import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 
 function Expenses(props) {
+    const [filteredYear, setFilteredYear] = useState('2020');
+  
+    const filterChangeHandler = selectedYear => {
+      setFilteredYear(selectedYear);
+    };
+
   return (
     <Card className="expenses">
       <ExpenseItem
