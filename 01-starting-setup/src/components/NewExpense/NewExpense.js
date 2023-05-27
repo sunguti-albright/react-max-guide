@@ -1,6 +1,7 @@
-import React from 'react'
-import './NewExpense.css'
-import ExpenseForm from './ExpenseForm'
+    const expenseData = {
+      ...enteredExpenseData,
+      id: Math.random().toString(),
+    };
 
 function NewExpense() {
   return (
