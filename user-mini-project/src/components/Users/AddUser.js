@@ -25,16 +25,16 @@ const AddUser = (props) => {
       });
       return;
     }
-    if (+enteredAge < 1) {
+    if (+enteredUserAge < 1) {
       setError({
         title: 'Invalid age',
         message: 'Please enter a valid age (> 0).',
       });
       return;
     }
-    props.onAddUser(enteredUsername, enteredAge);
-    setEnteredUsername('');
-    setEnteredAge('');
+    props.onAddUser(enteredName, enteredUserAge);
+    nameInputRef.current.value = ''
+    ageInputRef.current.value = ''
   };
 
   const usernameChangeHandler = (event) => {
