@@ -8,7 +8,7 @@ function Chart(props) {
  {
     props.dataPoints.map((datapoint)=>(
         <ChartBar
-        // unique id/label
+        // unique id/label ==> key
         key={datapoint.key} 
         value ={datapoint.value}
         maxValue={null} 
