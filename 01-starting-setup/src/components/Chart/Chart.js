@@ -5,6 +5,7 @@ import './Chart.css'
 function Chart(props) {
    //getting the maximum expense value for selected month
    const dataPointsValues = props.dataPoints.map(datapoint => datapoint.value) //this returns an array(from the data object) with expense values only
+   const totalMaximum = Math.max(...dataPointsValues) //return the maximum value for selected month, use spread operator to get values from array
   return (
      <div className='chart'>
  {
