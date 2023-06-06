@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import CourseGoalList from './components/CourseGoals/CourseGoalList/CourseGoalList';
 import CourseInput from './components/CourseGoals/CourseInput/CourseInput';
 import './App.css';
+import Wrapper from './components/Helpers/Wrapper';
 
 const App = () => {
   const [courseGoals, setCourseGoals] = useState([
@@ -37,7 +38,7 @@ const App = () => {
 
   return (
 
- <div>
+ <Wrapper>
        <section id="goal-form">
         <CourseInput onAddGoal={addGoalHandler} />
       </section>
@@ -45,7 +46,7 @@ const App = () => {
         {content}
       </section>
 
- </div>
+ </Wrapper>
   );
 };
 
