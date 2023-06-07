@@ -36,6 +36,9 @@ const Login = (props) => {
   const [emailState, dispatchEmailAction] = useReducer(emailReducer, { value: "", isValid: false });
   const [passwordState, dispatchPasswordAction] = useReducer(passwordReducer, { value: "", isValid: false });
 
+  //object destructuring to extract isValid
+  const {isValid: emailStateIsValid} = emailState
+  const {isValid: passwordStateIsValid} = passwordState
 
   //handle side effect, keystrokes, api calls etc, 
   //action that should be executed in response to some other action
@@ -52,7 +55,7 @@ const Login = (props) => {
 
   const emailChangeHandler = (event) => {
     dispatchEmailAction({ type: 'USER_INPUT', value: event.target.value });
-    setEnteredEmail(event.target.value);
+    // setEnteredEmail(event.target.value);
   };
 
   const passwordChangeHandler = (event) => {
