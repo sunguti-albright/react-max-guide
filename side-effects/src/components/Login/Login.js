@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer } from 'react';
-
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
@@ -45,26 +44,26 @@ const Login = (props) => {
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("CHECKING FORM VALIDITY")
-      setFormIsValid(emailState.value.includes('@') && passwordState.value.trim().length > 6) //this code only runs once  //use email && password states which stores the entered values
+      setFormIsValid(emailStateIsValid &&  passwordStateIsValid)
+      // setFormIsValid(emailState.value.includes('@') && passwordState.value.trim().length > 6) //this code only runs once  //use email && password states which stores the entered values
     }, 500)
     return () => {  //this is a cleanup function(runs before every new side effect function execution)
       console.log("CLEANUP")
       clearTimeout(identifier);
     };
-  }, [emailState.value, passwordState.value]);
+  }, [emailStateIsValid, passwordStateIsValid]);
 
   const emailChangeHandler = (event) => {
-    dispatchEmailAction({ type: 'USER_INPUT', value: event.target.value });
+    dispatchEmailAction({ type: 'USER_INPUT', val: event.target.value });
     // setEnteredEmail(event.target.value);
   };
 
   const passwordChangeHandler = (event) => {
-    dispatchPasswordAction({ type: 'USER_PASSWORD', value: event.target.value });
-    setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      event.target.value.trim().length > 6 && emailState.isValid
-    );
+    dispatchPasswordAction({ type: 'USER_PASSWORD', val: event.target.value });
+    // setEnteredPassword(event.target.value);
+    // setFormIsValid(
+    //   event.target.value.trim().length > 6 && emailState.isValid
+    // );
   };
 
   const validateEmailHandler = () => {
