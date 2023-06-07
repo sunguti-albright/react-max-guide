@@ -24,11 +24,15 @@ const passwordReducer = (state, action) => {
 }
 
 const Login = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [emailIsValid, setEmailIsValid] = useState();
-  const [enteredPassword, setEnteredPassword] = useState('');
-  const [passwordIsValid, setPasswordIsValid] = useState();
+  // const [enteredEmail, setEnteredEmail] = useState('');
+  // const [emailIsValid, setEmailIsValid] = useState();
+  // const [enteredPassword, setEnteredPassword] = useState('');
+  // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
+
+  // const[state, dispatchFn] = useReducer(reducerFn, initialState, initFn) ===> useReducer syntax
+  const [emailState, dispatchEmailAction] = useReducer(emailReducer, { value: "", isValid: false });
+  const [passwordState, dispatchPasswordAction] = useReducer(passwordReducer, { value: "", isValid: false });
 
   //handle side effect, keystrokes, api calls etc, 
   //action that should be executed in response to some other action
