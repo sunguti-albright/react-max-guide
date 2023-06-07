@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+
 
 const emailReducer = (state, action) => {
   if (action.type === 'USER_INPUT') {
@@ -13,6 +14,7 @@ const emailReducer = (state, action) => {
   }
   return { value: "", isValid: false }
 }
+
 const passwordReducer = (state, action) => {
   if (action.type === 'USER_PASSWORD') {
     return { value: action.val, isValid: action.val.trim().length > 6 }
@@ -34,15 +36,15 @@ const Login = (props) => {
   const [emailState, dispatchEmailAction] = useReducer(emailReducer, { value: "", isValid: false });
   const [passwordState, dispatchPasswordAction] = useReducer(passwordReducer, { value: "", isValid: false });
 
+
   //handle side effect, keystrokes, api calls etc, 
   //action that should be executed in response to some other action
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("CHECKING FORM VALIDITY")
-      setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length > 6) //this code only runs once
+      setFormIsValid(emailState.value.includes('@') && passwordState.value.trim().length > 6) //this code only runs once  //use email && password states which stores the entered values
     }, 500)
-    //this is a cleanup function(runs before every new side effect function execution)
-    return () => {
+    return () => {  //this is a cleanup function(runs before every new side effect function execution)
       console.log("CLEANUP")
       clearTimeout(identifier);
     };
@@ -63,16 +65,18 @@ const Login = (props) => {
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes('@'));
+    dispatchEmailAction({ type: 'INPUT_BLUR' });
+    // setEmailIsValid(emailState.value.includes('@'));
   };
 
   const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 6);
+    dispatchPasswordAction({ type: 'PASSWORD_BLUR' });
+    // setPasswordIsValid(enteredPassword.trim().length > 6);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
+    props.onLogin(emailState.value, passwordState.value);
   };
 
   return (
