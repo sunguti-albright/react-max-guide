@@ -46,17 +46,19 @@ const Login = (props) => {
       console.log("CLEANUP")
       clearTimeout(identifier);
     };
-  }, [enteredEmail, enteredPassword]);
+  }, [emailState.value, passwordState.value]);
 
   const emailChangeHandler = (event) => {
+    dispatchEmailAction({ type: 'USER_INPUT', value: event.target.value });
     setEnteredEmail(event.target.value);
   };
 
   const passwordChangeHandler = (event) => {
+    dispatchPasswordAction({ type: 'USER_PASSWORD', value: event.target.value });
     setEnteredPassword(event.target.value);
 
     setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
+      event.target.value.trim().length > 6 && emailState.isValid
     );
   };
 
