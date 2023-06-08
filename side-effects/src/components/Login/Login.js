@@ -82,7 +82,14 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    if (formIsValid) {
+      props.onLogin(emailState.value, passwordState.value);
+    } else if (!emailStateIsValid) {
+      emailInputRef.current.activate();
+    }
+    else {
+      passwordInputRef.current.activate();
+    }
   };
 
   return (
