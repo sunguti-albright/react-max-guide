@@ -42,6 +42,7 @@ const Login = (props) => {
   const { isValid: emailStateIsValid } = emailState
   const { isValid: passwordStateIsValid } = passwordState
 
+  const passwordInputRef = useRef();
   //handle side effect, keystrokes, api calls etc, 
   //action that should be executed in response to some other action
   useEffect(() => {
