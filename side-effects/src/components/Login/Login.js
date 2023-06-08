@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useRef } from 'react';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
@@ -42,7 +42,10 @@ const Login = (props) => {
   const { isValid: emailStateIsValid } = emailState
   const { isValid: passwordStateIsValid } = passwordState
 
+  // email and password input refs
+  const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
   //handle side effect, keystrokes, api calls etc, 
   //action that should be executed in response to some other action
   useEffect(() => {
@@ -95,22 +98,10 @@ const Login = (props) => {
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-    <Input id="email" label="E-mail" type="email" isValid={emailStateIsValid} value={emailState.valuegit }/>
-        <div
-          className={`${classes.control} ${passwordState.isValid === false ? classes.invalid : ''
-            }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={passwordState.value}
-            onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
-          />
-        </div>
+        <Input id="email" label="E-mail" type="email" isValid={emailStateIsValid} value={emailState.value} onChange={emailChangeHandler} onBlur={validateEmailHandler} ref={emailInputRef} />
+        <Input id="password" label="password" type="password" isValid={passwordStateIsValid} value={passwordState.value} onChange={passwordChangeHandler} onBlur={validatePasswordHandler} ref={passwordInputRef} />
         <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+          <Button type="submit" className={classes.btn}>
             Login
           </Button>
         </div>
